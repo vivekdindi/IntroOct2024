@@ -9,10 +9,16 @@ I am *not* looking for super "technical" stuff here. Just your ability to expres
 We created a git repository on our VMs and added some existing code and committed it. We then used the `gh` cli tool to push that code to Github. 
 
 - Say a few words about why *we* are using source control in this class?
+  To keep track of code commits we do in each class
 - Say a few words about how source control is used by teams of developers working on the same code base.
+    Developers clone the Git repo into their local machine and then start working on their task. 
+    when the task is compleated then they will commit their changes and puch the code to the Common Git repo
 - What is meant when we say a copy of the repository is the "origin"? (That's our copy on github).
+    Origin is our main branch that has final project
 - Why do we create commits locally?
+    To save all the chnages we did in our local machine to the project
 - Why do we push those commits to Github?
+    When we puch code to github every one can see our changes 
 
 
 ### Extra Credit
