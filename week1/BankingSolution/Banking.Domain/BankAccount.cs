@@ -4,16 +4,24 @@ namespace Banking.Domain;
 
 public class BankAccount
 {
-    private decimal defaultBonus = 500M;
+    private decimal _balance = 5000M;
 
+    public void WithDraw(decimal amountToWithDraw)
+    {
+
+        _balance -= amountToWithDraw;
+    }
     public void Deposit(decimal amountToDeposit)
     {
-        defaultBonus += amountToDeposit;
+        _balance += amountToDeposit;
     }
 
     public decimal GetBalance()
     {
 
-        return defaultBonus;
+        return _balance;
     }
+
+
+
 }

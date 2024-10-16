@@ -11,12 +11,17 @@ public class MakingDeposits
         var openingBalance = account.GetBalance();
         var amountToDeposit = 112.25M;
 
+
         //when
         account.Deposit(amountToDeposit);
+
 
         //then
         var endingBalance = account.GetBalance();
         Assert.Equal(amountToDeposit + openingBalance, endingBalance);
+
+
+
 
 
     }
