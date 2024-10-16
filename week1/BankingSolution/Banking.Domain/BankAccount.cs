@@ -6,11 +6,7 @@ public class BankAccount
 {
     private decimal _balance = 5000M;
 
-    public void WithDraw(decimal amountToWithDraw)
-    {
 
-        _balance -= amountToWithDraw;
-    }
     public void Deposit(decimal amountToDeposit)
     {
         _balance += amountToDeposit;
@@ -21,6 +17,22 @@ public class BankAccount
 
         return _balance;
     }
+
+    public void Withdraw(decimal amountToWithdraw)
+    {
+        if (_balance > amountToWithdraw)
+        {
+
+            _balance -= amountToWithdraw;
+        }
+        else
+        {
+            throw new ArgumentOutOfRangeException();
+        }
+    }
+
+
+    public class AccountOverdraftException : ArgumentOutOfRangeException;
 
 
 
