@@ -1,58 +1,32 @@
-﻿using Banking.Domain;
+﻿
+
+using Banking.Domain;
 
 namespace Banking.Tests.Account;
-
-
 public class MakingWithdrawls
 {
-    //    [Fact]
-    //    public void Withdraw()
-    //    {
-
-    //        //given
-    //        var account = new BankAccount();
-    //        var openingBalance = account.GetBalance();
-
-    //        var amountToWithDraw = 112.25M;
-
-    //        //when
-
-    //        account.Withdraw(amountToWithDraw);
-
-    //        //then
-
-    //        var balance = account.GetBalance();
-    //        Assert.Equal(openingBalance - amountToWithDraw, balance);
-
-    //    }
-
-
     [Theory]
     [InlineData(112.25)]
-    [InlineData(30.25)]
-    public void Withdraw(decimal amountToWithDraw)
+    [InlineData(305.26)]
+    public void WithdrawingMoneyDecreasesBalance(decimal amountToWithdraw)
     {
-
-        //given
+        // Given
         var account = new BankAccount();
         var openingBalance = account.GetBalance();
+        //var amountToWithdraw = 112.25M;
 
+        // When
+        account.Withdraw(amountToWithdraw);
 
+        // Then
+        var endingBalance = account.GetBalance();
 
-        //when
-
-        account.Withdraw(amountToWithDraw);
-
-        //then
-
-        var balance = account.GetBalance();
-        Assert.Equal(openingBalance - amountToWithDraw, balance);
-
+        Assert.Equal(openingBalance - amountToWithdraw, endingBalance);
     }
 
-    [Fact]
 
-    public void CustomersCanTakeTheirFullBalance()
+    [Fact]
+    public void CustomersCanTheirFullBalance()
     {
         var account = new BankAccount();
         var openingBalance = account.GetBalance();
@@ -60,8 +34,5 @@ public class MakingWithdrawls
         account.Withdraw(openingBalance);
 
         Assert.Equal(0, account.GetBalance());
-
-
     }
-
 }

@@ -1,39 +1,42 @@
 ﻿
 
+
 namespace Banking.Domain;
 
 public class BankAccount
 {
-    private decimal _balance = 5000M;
-
-
-    public void Deposit(decimal amountToDeposit)
+    public bool IsGold = false;
+    private decimal _balance = 7000M;
+    public virtual void Deposit(decimal amountToDeposit)
     {
-        _balance += amountToDeposit;
+        if (IsGold)
+        {
+            _balance += amountToDeposit * 1.10M;
+        }
+        else
+        {
+            _balance += amountToDeposit;
+        }
+
+
     }
 
     public decimal GetBalance()
     {
-
         return _balance;
     }
 
     public void Withdraw(decimal amountToWithdraw)
     {
-        if (_balance > amountToWithdraw)
+        if (_balance >= amountToWithdraw)
         {
-
             _balance -= amountToWithdraw;
         }
         else
         {
-            throw new ArgumentOutOfRangeException();
+            throw new AccountOverdraftException();
         }
     }
-
-
-    public class AccountOverdraftException : ArgumentOutOfRangeException;
-
-
-
 }
+
+public class AccountOverdraftException : ArgumentOutOfRangeException;
