@@ -3,20 +3,24 @@
 
 namespace Banking.Domain;
 
-public class BankAccount
+public class BankAccount(ICalculateBonusForDeposits calculater)
 {
-    public bool IsGold = false;
+    //public bool IsGold = false;
     private decimal _balance = 7000M;
-    public virtual void Deposit(decimal amountToDeposit)
+    //private ICalculateBonusForDeposits calculater;
+
+    //public BankAccount(ICalculateBonusForDeposits calculater)
+    //{
+    //    this.calculater = calculater;
+    //}
+
+    public void Deposit(decimal amountToDeposit)
     {
-        if (IsGold)
-        {
-            _balance += amountToDeposit * 1.10M;
-        }
-        else
-        {
-            _balance += amountToDeposit;
-        }
+
+
+        decimal bonus = calculater.CalculateBonusForDepositOn(_balance, amountToDeposit);
+
+        _balance += amountToDeposit + bonus;
 
 
     }
