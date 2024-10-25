@@ -3,23 +3,26 @@ namespace CSharpSyntax;
 public class UnitTest1
 {
     [Fact]
-    public void CanAddTwoInt()
+    public void CanAddTenAndTwenty()
     {
         int a = 10;
         int b = 20;
         int answer;
-        answer = a + b;
+
+        answer = a + b; // System Under Test -(SUT)
+
         Assert.Equal(30, answer);
 
-
     }
+
     [Theory]
     [InlineData(10, 20, 30)]
-    [InlineData(1, 27, 28)]
+    [InlineData(2, 2, 4)]
     [InlineData(10, 2, 12)]
-    public void CanAddSomeInt(int a, int b, int expecting)
+    public void CanAddSomeIntegersTogether(int a, int b, int expecting)
     {
         int answer = a + b;
+
         Assert.Equal(expecting, answer);
     }
 }

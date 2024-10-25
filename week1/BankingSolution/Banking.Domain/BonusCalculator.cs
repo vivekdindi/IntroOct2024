@@ -1,12 +1,12 @@
 ﻿
 namespace Banking.Domain;
 
-public class BonusCalculator : ICalculateBonusForDeposits
+public class BonusCalculator : ICalculateBonusesForDeposits
 {
 
 
     public decimal CalculateBonusForDepositOn(decimal balance, decimal amount)
     {
-        return balance >= 5000 ? amount * 0.10M : 0;
+        return balance >= 5000 ? amount * .10M : 0;
     }
 }

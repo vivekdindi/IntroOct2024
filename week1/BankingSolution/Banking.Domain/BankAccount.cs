@@ -3,26 +3,22 @@
 
 namespace Banking.Domain;
 
-public class BankAccount(ICalculateBonusForDeposits calculater)
+public class BankAccount(ICalculateBonusesForDeposits calculator)
 {
-    //public bool IsGold = false;
     private decimal _balance = 7000M;
-    //private ICalculateBonusForDeposits calculater;
+    //private ICalculateBonusesForDeposits calculator;
 
-    //public BankAccount(ICalculateBonusForDeposits calculater)
+    //public BankAccount(ICalculateBonusesForDeposits calculator)
     //{
-    //    this.calculater = calculater;
+    //    this.calculator = calculator;
     //}
 
     public void Deposit(decimal amountToDeposit)
     {
 
-
-        decimal bonus = calculater.CalculateBonusForDepositOn(_balance, amountToDeposit);
+        decimal bonus = calculator.CalculateBonusForDepositOn(_balance, amountToDeposit);
 
         _balance += amountToDeposit + bonus;
-
-
     }
 
     public decimal GetBalance()
@@ -32,7 +28,7 @@ public class BankAccount(ICalculateBonusForDeposits calculater)
 
     public void Withdraw(decimal amountToWithdraw)
     {
-        if (_balance >= amountToWithdraw)
+        if (HasSufficientFundsForWithrawal(amountToWithdraw))
         {
             _balance -= amountToWithdraw;
         }
@@ -40,6 +36,11 @@ public class BankAccount(ICalculateBonusForDeposits calculater)
         {
             throw new AccountOverdraftException();
         }
+    }
+
+    private bool HasSufficientFundsForWithrawal(decimal amountToWithdraw)
+    {
+        return _balance >= amountToWithdraw;
     }
 }
 

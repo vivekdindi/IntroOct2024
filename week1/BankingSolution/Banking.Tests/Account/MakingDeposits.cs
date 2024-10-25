@@ -16,8 +16,6 @@ public class MakingDeposits
         // Given
         var account = new BankAccount(new DummyBonusCalculator());
         var openingBalance = account.GetBalance();
-        var amountToDeposit = 100M;
-
 
 
         // When

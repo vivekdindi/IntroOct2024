@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, input } from '@angular/core';
 
 @Component({
-  selector: 'app-banking-success-notofication',
+  selector: 'app-banking-success-notification',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [],
@@ -20,7 +20,7 @@ import { Component, ChangeDetectionStrategy, input } from '@angular/core';
           d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
         />
       </svg>
-      <span> {{ message() }} </span>
+      <span>{{ message() }}</span>
     </div>
   `,
   styles: ``,

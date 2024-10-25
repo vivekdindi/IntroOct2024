@@ -1,12 +1,17 @@
-import { Component, ChangeDetectionStrategy, input } from '@angular/core';
-import { TransactionRecord } from '../types';
-import { CurrencyPipe } from '@angular/common';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  signal,
+  input,
+} from '@angular/core';
+import { TransactionRecord, TransactionRecordModel } from '../types';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-banking-transaction-history',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CurrencyPipe],
+  imports: [CurrencyPipe, DatePipe],
   template: `
     <div class="overflow-x-auto">
       <table class="table">
@@ -23,7 +28,7 @@ import { CurrencyPipe } from '@angular/common';
         <tbody>
           @for(tx of historyToDisplay(); track tx.id) {
           <tr class="bg-base-200">
-            <th>{{ tx.id }}</th>
+            <th [title]="tx.id">{{ tx.created | date : 'medium' }}</th>
             <td>{{ tx.startingBalance | currency }}</td>
             <td>
               @if(tx.type === 'deposit') {
@@ -32,7 +37,15 @@ import { CurrencyPipe } from '@angular/common';
               <span>👇</span>
               }
             </td>
-            <td>{{ tx.amount | currency }}</td>
+            <td class="text-right">
+              @if(tx.pending) {
+              {{ tx.amount | currency }}
+              <span class="loading loading-bars loading-xs"></span>
+
+              } @else {
+              {{ tx.amount | currency }}
+              }
+            </td>
             <td>{{ tx.newBalance | currency }}</td>
           </tr>
           } @empty {
@@ -45,5 +58,5 @@ import { CurrencyPipe } from '@angular/common';
   styles: ``,
 })
 export class TransactionHistoryComponent {
-  historyToDisplay = input.required<TransactionRecord[]>();
+  historyToDisplay = input.required<TransactionRecordModel[]>();
 }
